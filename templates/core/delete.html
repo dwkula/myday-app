@@ -1,0 +1,14 @@
+{% extends 'core/base.html' %}
+{% block content %}
+    <div class="menu-header">
+        <a href="{% url 'tasks' %}">Powrót</a>
+    </div>
+
+    <div class="card-body">
+    <form method="POST">
+        {% csrf_token %}
+        <p>Jesteś pewien, że chcesz usunąć "{{ task }}"?</p>
+        <input class="button" type="submit" value="Usuń"/>
+    </form>
+
+{% endblock %}

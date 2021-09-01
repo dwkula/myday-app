@@ -1,0 +1,63 @@
+{% extends 'core/base.html' %}
+{% load pluralize_pl %}
+{% block content %}
+    <div class="menu-header">
+        <div>
+            <h1><i class="fas fa-user-alt"></i>Witaj, {{ request.user|title }}</h1>
+            <h3 style="font-size: 20pt;"> Masz jeszcze do
+                zrobienia {{ count }} {{ count|pluralize_pl:"zadanie, zadań, zadania" }} </h3>
+        </div>
+        <div>
+        {% if request.user.is_authenticated %}
+            <br>
+            <br>
+            <br>
+
+            <br>
+            <br>
+            <br>
+            <i class="fas fa-lock-open" style="font-size: 20pt"></i>
+            <a href="{% url 'logout' %}">Wyloguj się</a>
+        {% else %}
+            <a href="{% url 'login' %}">Zaloguj się</a>
+        {% endif %}
+        </div>
+    </div>
+
+    <div class="search-add-wrapper">
+        <form method="GET" style="margin-top: 20px;display: flex;">
+            <input type="text" name="search-area" value="{{ search_input }}">
+            <input class="button" type="submit" value="Szukaj">
+        </form>
+        <a id="task-creation" href="{% url 'task-create' %}">Dodaj zadanie</a>
+    </div>
+
+
+    <div class="tasks-wrapper">
+        {% for task in tasks %}
+            <div class="single-task-wrapper">
+                {% if task.is_completed %}
+                    <div class="task-name">
+                        <div><i class="fas fa-check"></i></div>
+                        <a style="color:darkgray;" href="{% url 'task-update' task.id %}">{{ task }}</a>
+                    </div>
+                    <a class="task-delete" href="{% url 'task-delete' task.id %}">&#215;</a>
+                {% else %}
+                    <div class="task-name">
+                        <div class="task-incomplete-icon"></div>
+                        <a style="color: black; " href="{% url 'task-update' task.id %}">{{ task }}</a>
+                    </div>
+                    <a class="task-delete" href="{% url 'task-delete' task.id %}">&#215;</a>
+                {% endif %}
+            </div>
+        {% empty %}
+            <h3>Nie masz jeszcze żadnych zadań</h3>
+        {% endfor %}
+    </div>
+
+
+
+
+
+
+{% endblock content %}

@@ -1,0 +1,22 @@
+{% extends 'core/base.html' %}
+{% block content %}
+    <div class="menu-header">
+        <h1><i class="fas fa-user-friends"></i> Rejestracja</h1>
+
+    </div>
+    <div class="card-body">
+
+        <form method="POST">
+            {% csrf_token %}
+            <label class="label-style">Nazwa użytkownika</label>
+            <div class="form-field-style">{{ form.username }}</div>
+            <label class="label-style">Hasło</label>
+            <div class="form-field-style">{{ form.password1 }}</div>
+            <label class="label-style">Powtórz hasło</label>
+            <div class="form-field-style">{{ form.password2 }}</div>
+            <input style="margin-top: 10px;" class="button" type="submit" value="Zarejestruj"/>
+        </form>
+        <p>Masz już konto? <a href={%  url 'login' %}>Logowanie</a> </p>
+    </div>
+
+{% endblock content %}

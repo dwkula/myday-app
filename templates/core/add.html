@@ -1,0 +1,20 @@
+{% extends 'core/base.html' %}
+{% block content %}
+    <div class="menu-header">
+        <a href="{% url 'tasks' %}"><i class="fas fa-hand-point-left"></i> Powrót</a>
+    </div>
+
+    <div class="card-body">
+        <form method="POST" action="">
+            {% csrf_token %}
+            <label>Nazwa</label>
+            {{ form.title }}
+            <label>Opis</label>
+            {{ form.description }}
+            <label>Ukończ</label>
+            {{ form.is_completed }}<br>
+            <input class="button" type="submit" value="Prześlij">
+        </form>
+    </div>
+
+{% endblock content %}
